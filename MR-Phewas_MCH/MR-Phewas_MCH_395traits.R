@@ -1,7 +1,7 @@
 ##############################################################
 ### MR-Phewas of mean corpuscular hemoglobin on 395 traits ###
 ##############################################################
-
+####
 # pull in args
 args  <-  commandArgs(trailingOnly = TRUE)
 Trait   <-  toString(args[1]) #Phenotypic exposure or outcome of interest

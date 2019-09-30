@@ -1,0 +1,21 @@
+PLINK v1.90b3f 64-bit (2 Mar 2015) 
+7 arguments: --bfile eur --extract height_SNPs.txt --out height_SNPs_kept --write-snplist
+Hostname: newblue2
+Working directory: /newhome/hw15842/PhD/CCR5/proper_finemapping
+Start time: Fri Sep 27 13:58:18 2019
+
+Random number seed: 1569589098
+129152 MB RAM detected; reserving 64576 MB for main workspace.
+10090068 variants loaded from .bim file.
+503 people (0 males, 0 females, 503 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to height_SNPs_kept.nosex .
+--extract: 3048 variants remaining.
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 503 founders and 0 nonfounders present.
+Calculating allele frequencies... done.
+Total genotyping rate is 0.999974.
+3048 variants and 503 people pass filters and QC.
+Note: No phenotypes present.
+List of variant IDs written to height_SNPs_kept.snplist .
+
+End time: Fri Sep 27 13:58:22 2019

@@ -1,0 +1,21 @@
+PLINK v1.90b3f 64-bit (2 Mar 2015) 
+7 arguments: --bfile eur --extract LC_SNPs.txt --out LC_SNPs_kept --write-snplist
+Hostname: newblue2
+Working directory: /newhome/hw15842/PhD/CCR5/proper_finemapping
+Start time: Fri Sep 27 13:44:29 2019
+
+Random number seed: 1569588269
+129152 MB RAM detected; reserving 64576 MB for main workspace.
+10090068 variants loaded from .bim file.
+503 people (0 males, 0 females, 503 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to LC_SNPs_kept.nosex .
+--extract: 3048 variants remaining.
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 503 founders and 0 nonfounders present.
+Calculating allele frequencies... done.
+Total genotyping rate is 0.999974.
+3048 variants and 503 people pass filters and QC.
+Note: No phenotypes present.
+List of variant IDs written to LC_SNPs_kept.snplist .
+
+End time: Fri Sep 27 13:44:34 2019

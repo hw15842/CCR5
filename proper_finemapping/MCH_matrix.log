@@ -1,0 +1,21 @@
+PLINK v1.90b3f 64-bit (2 Mar 2015) 
+8 arguments: --bfile eur --extract MCH_SNPs.txt --out MCH_matrix --r2 square
+Hostname: newblue2
+Working directory: /newhome/hw15842/PhD/CCR5/proper_finemapping
+Start time: Fri Sep 27 13:49:14 2019
+
+Random number seed: 1569588554
+129152 MB RAM detected; reserving 64576 MB for main workspace.
+10090068 variants loaded from .bim file.
+503 people (0 males, 0 females, 503 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to MCH_matrix.nosex .
+--extract: 3048 variants remaining.
+Using up to 15 threads (change this with --threads).
+Before main variant filters, 503 founders and 0 nonfounders present.
+Calculating allele frequencies... done.
+Total genotyping rate is 0.999974.
+3048 variants and 503 people pass filters and QC.
+Note: No phenotypes present.
+--r2 square to MCH_matrix.ld ... done.
+
+End time: Fri Sep 27 13:49:26 2019

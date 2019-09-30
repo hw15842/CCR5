@@ -1,0 +1,98 @@
+
+R version 3.5.1 (2018-07-02) -- "Feather Spray"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> ##########################
+> ### Finemapping_proper ###
+> ##########################
+> 
+> library (devtools)
+Loading required package: usethis
+> library(plyr)
+> library(dplyr)
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:plyr’:
+
+    arrange, count, desc, failwith, id, mutate, rename, summarise,
+    summarize
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+> library(data.table)
+
+Attaching package: ‘data.table’
+
+The following objects are masked from ‘package:dplyr’:
+
+    between, first, last
+
+> 
+> setwd("/newhome/hw15842/PhD/CCR5/proper_finemapping")
+> 
+> ### Need to get the summary stats files into the correct format
+> 
+> ## rsid, chromosome, position, noneff_allele, eff_allele, maf, beta, se
+> 
+> 
+> 
+> finemapping_sorting_data_function <- function(outcome_trait) {
++ 
++ 	X <- fread(outcome_trait)
++ 	X$maf <- ifelse (X$EAF<=0.5, as.numeric(X$EAF),
++                     ifelse(X$EAF>=0.5, as.numeric(1-(X$EAF)), NA))
++ 	X <- subset(X, select=-c(EAF, REF, P, N, INFO))
++ 	names(X) <- c("rsid", "chromosome", "position", "eff_allele", "noneff_allele", "beta", "se", "maf")
++ 	X <- subset(X, select=c(1,2,3,5,4,8,6,7))
++ 	return(X)
++ 
++ }
+> 
+> temp = list.files(path="/newhome/hw15842/PhD/CCR5/proper_finemapping", pattern=".sumstats.gz")
+> temp
+[1] "blood_HIGH_LIGHT_SCATTER_RETICULOCYTE_COUNT.sumstats.gz"
+[2] "blood_LYMPHOCYTE_COUNT.sumstats.gz"                     
+[3] "blood_MEAN_CORPUSCULAR_HEMOGLOBIN.sumstats.gz"          
+[4] "blood_MEAN_SPHERED_CELL_VOL.sumstats.gz"                
+[5] "body_HEIGHTz.sumstats.gz"                               
+> 
+> Z1 <- lapply(temp, finemapping_sorting_data_function)
+> 
+> names(Z1) <- temp
+> 
+> 
+> for (x in names(Z1))
++   write.table(Z1[[x]], file=paste(x, "reordered_for_finemapping.txt", sep="_"), sep="\t", quote=F, row.names=F)
+> 
+> 
+> 
+> 
+> 
+> UC <- fread("UC_de_Lange_2017_HW_EDITS.assoc.tsv.gz")
+> UC$maf <- ifelse (UC$freq<=0.5, as.numeric(UC$freq),
++                    ifelse(UC$freq>=0.5, as.numeric(1-(UC$freq)), NA))
+> X <- subset(X, select=-c(freq, p, n))
+Error in subset(X, select = -c(freq, p, n)) : object 'X' not found
+Execution halted

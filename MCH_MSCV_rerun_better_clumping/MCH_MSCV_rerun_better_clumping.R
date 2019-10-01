@@ -23,11 +23,11 @@ library(TwoSampleMR)
 
 #ao <- available_outcomes()
 
-MCH_clumped_res_1 <- read.table ("MCH_clumping_results_all.txt", header=T)
-MSCV_clumped_res_1 <- read.table("MSCV_clumping_results_all.txt", header=T)
+#MCH_clumped_res_1 <- read.table ("MCH_clumping_results_all.txt", header=T)
+#MSCV_clumped_res_1 <- read.table("MSCV_clumping_results_all.txt", header=T)
 
-MCH_clumped_res_2 <- clump_data(MCH_clumped_res_1)
-MSCV_clumped_res_2 <- clump_data(MSCV_clumped_res_1)
+MCH_clumped_res_2 <- read.table("MCH_clumped_res_2.txt", header=T)
+MSCV_clumped_res_2 <- read.table("MSCV_clumped_res_2.txt", header=T)
 
 
 
@@ -76,6 +76,9 @@ outcome_traits_mrbase <- outcome_traits_mrbase[!is.na(outcome_traits_mrbase$MR.B
 
 other_trait_names <- read.table("other_traits_URLs.txt")
 
+other_trait_names_1 <- head(other_trait_names, n=23)
+other_trait_names_2 <- tail(other_trait_names, n=24)
+
 #read_other_traits <- function(trait_name){#
 
 #	paste_file1 <- paste("https://data.broadinstitute.org/alkesgroup/UKBB/", trait_name, sep="")
@@ -95,15 +98,16 @@ other_trait_names <- read.table("other_traits_URLs.txt")
 
 ### read in the files that were made above 
 
-read_in_files <- function(trait_file){
+read_in_files <- function(trait_name){
 
 	paste_file1 <- paste("other_trait", trait_name, sep="_")
 	other_trait <- fread(paste_file1)
-	assign(paste_file1, other_trait, envir=globalenv())
 
 }
 
-X <- lapply(other_trait_names$V1, read_in_files)
+X <- lapply(other_trait_names_1$V1, read_in_files)
+
+Y <- lapply(other_trait_names_2$V1, read_in_files)
 
 head(X)
 
@@ -116,9 +120,13 @@ run_mr_MCH_other <- function(outcome_ID){
   return(res1)
 }
 
-results_other_MCH <- lapply(X, run_mr_MCH_other)
-results_other_MCH_table <- ldply(results_other_MCH, data.frame)
-write.table(results_other_MCH_table, file="results_other_MCH_table_new_clumping_data.txt", quote=F, sep="\t")
+results_other_MCH_1 <- lapply(X, run_mr_MCH_other)
+results_other_MCH_table_1 <- ldply(results_other_MCH_1, data.frame)
+write.table(results_other_MCH_table_1, file="results_other_MCH_table_new_clumping_data_1.txt", quote=F, sep="\t")
+
+results_other_MCH_2 <- lapply(Y, run_mr_MCH_other)
+results_other_MCH_table_2 <- ldply(results_other_MCH_2, data.frame)
+write.table(results_other_MCH_table_2, file="results_other_MCH_table_new_clumping_data_2.txt", quote=F, sep="\t")
 
 ### MSCV ###
 
@@ -129,9 +137,13 @@ run_mr_MSCV_other <- function(outcome_ID){
   return(res1)
 }
 
-results_other_MSCV <- lapply(X, run_mr_MSCV_other)
-results_other_MSCV_table <- ldply(results_other_MSCV, data.frame)
-write.table(results_other_MSCV_table, file="results_other_MSCV_table_new_clumping_data.txt", quote=F, sep="\t")
+results_other_MSCV_1 <- lapply(X, run_mr_MSCV_other)
+results_other_MSCV_table_1 <- ldply(results_other_MSCV_1, data.frame)
+write.table(results_other_MSCV_table_1, file="results_other_MSCV_table_new_clumping_data_1.txt", quote=F, sep="\t")
+
+results_other_MSCV_2 <- lapply(Y, run_mr_MSCV_other)
+results_other_MSCV_table_2 <- ldply(results_other_MSCV_2, data.frame)
+write.table(results_other_MSCV_table_2, file="results_other_MSCV_table_new_clumping_data_2.txt", quote=F, sep="\t")
 
 
 #### Bring all results together ##
